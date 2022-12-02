@@ -41,11 +41,18 @@ public class BubbleSort {
 
     }
 
-
     public static int[] fillArray(int[] data) {
         Random random = new Random();
         for (int i = 0; i < data.length; i++) {
             data[i] = random.nextInt(999999);
+        }
+        return data;
+    }
+
+    public static int[] fillArray(int[] data, int bound) {
+        Random random = new Random();
+        for (int i = 0; i < data.length; i++) {
+            data[i] = random.nextInt(bound);
         }
         return data;
     }
