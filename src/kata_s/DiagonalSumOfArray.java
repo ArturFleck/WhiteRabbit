@@ -20,15 +20,17 @@ public class DiagonalSumOfArray {
         int c = arr.length - 1;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
-                if (j == i) {
+
+                if (j == i) {   //    left top\ right bottom
                     sum += arr[i][j];
                 }
 
-                if (j == c) {
-                    if (i != j)
+                if (j == c) {   //  right top / left bottom
+                    if (i != j) //  exception
                         sum += arr[i][j];
                     c--;
                 }
+
             }
         }
 
