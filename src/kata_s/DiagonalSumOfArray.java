@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class DiagonalSumOfArray {
     public static void main(String[] args) {
-        int[][] arr = new int[5][5];
+        int[][] arr = new int[3][3];
         Random rand = new Random();
 
         for (int i = 0; i < arr.length; i++) {
@@ -33,7 +33,6 @@ public class DiagonalSumOfArray {
         }
 
         System.out.println("\n\n" + sum);
-
     }
 
     public static void print(int[][] arr) {
