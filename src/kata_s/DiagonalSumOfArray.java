@@ -26,7 +26,7 @@ public class DiagonalSumOfArray {
                 }
 
                 if (j == c) {   //  right top / left bottom
-                    if (i != j) //  exception
+                    if (i != j) //  exception when we at the middle crossing
                         sum += arr[i][j];
                     c--;
                 }
