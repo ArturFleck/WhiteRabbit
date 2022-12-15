@@ -1,8 +1,12 @@
+import lombok.SneakyThrows;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class main {
+
+public class MainClass {
+    @SneakyThrows
     public static void main(String[] args) throws IOException {
 
         /*Bus bus = new Bus();
@@ -60,7 +64,7 @@ public class main {
 
         int k=15;   // how many cycles
 
-        Set<Integer> setList = new HashSet();   // Set 1
+        Set<Integer> setList = new HashSet<>();   // Set 1
         Set<Integer> setList2 = new HashSet();   // Set 2
 
         fillSet(setList,k);     // filling both Set's (Set, cycle)

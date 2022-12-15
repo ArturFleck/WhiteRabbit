@@ -1,13 +1,15 @@
-package pageReader;
+package pageReader_PARSER;
+
+import lombok.SneakyThrows;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class PageReader {
+    @SneakyThrows
     public static void main(String[] args) throws IOException {
         String urlStart = "https://libking.ru/books/sf-/sf-space/1067519-";
         String urlEnd = "frenk-herbert-dyuna-obnovlennyj-perevod-ot-2019-goda-litres.html#book";
@@ -32,6 +34,7 @@ public class PageReader {
                 while ((buffer = in.readLine()) != null) {
                     if (buffer.contains("<p>") && !buffer.contains("Шрифт") && !buffer.contains("Интервал") && !buffer.contains("Закладка") && !buffer.contains("Отзывы читателей") && !buffer.contains("все книги автора")) {
                         line = buffer;
+                        // cleaning from different shit
                         line = line.replaceAll("&nbsp;", "");
                         line = line.replaceAll("\t", "");
                         line = line.replaceAll("\t\t", "");
@@ -41,11 +44,10 @@ public class PageReader {
                         line = line.replaceAll("</em>", "");
                         //System.out.println( page.contains(line));
                         if (!page.contains(line))
-                            page.add(line);
+                            page.add(line); // adding clean page in array
                         //System.out.println(line);
                     }
                 }
-
                 in.close();
 
             } catch (MalformedURLException e) {
@@ -55,18 +57,24 @@ public class PageReader {
             }
         }
 
-        //page.forEach(System.out::println);
+        page.forEach(System.out::println);
 
-        try {
+//---------  version 1  writing in file
+/*        try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("Book.txt"));
-
             for (int i=0;i< page.size();i++) {
                 writer.write(page.get(i)+"\n");
             }
             writer.close();
-
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+
+//---------  version 2  writing in file
+/*        BufferedWriter writer = new BufferedWriter(new FileWriter("Book.txt"));
+        for (String s : page) {
+            writer.write(s + "\n");
         }
+        writer.close();*/
     }
 }
