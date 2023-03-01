@@ -18,12 +18,12 @@ public class ROT13 {
             char symbol = text.charAt(i);
             int numb;
 
-            if (((text.charAt(i) >= 65 && text.charAt(i) < 78) || (text.charAt(i) >= 97 && text.charAt(i) < 110))) {
+            if ((text.charAt(i) >= 65 && text.charAt(i) < 78) || (text.charAt(i) >= 97 && text.charAt(i) < 110)) {
                 symbol = text.charAt(i);
                 numb = symbol + 13;
                 symbol = (char) numb;
 
-            } else if (((text.charAt(i) >= 78 && text.charAt(i) < 91) || (text.charAt(i) >= 110 && text.charAt(i) < 123))) {
+            } else if ((text.charAt(i) >= 78 && text.charAt(i) < 91) || (text.charAt(i) >= 110 && text.charAt(i) < 123)) {
                 symbol = text.charAt(i);
                 numb = symbol - 13;
                 symbol = (char) numb;
