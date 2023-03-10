@@ -23,23 +23,25 @@ public class Square_Matrix_Multiplication {
     public static void main(String[] args) {
         //int[][] a = {{1,2},{3,2}};
         int[][] a = {   {1, 2, 3, 2, 1},
-                        {4, 5, 6, 5, 4},
-                        {7, 8, 9, 8, 7},
-                        {1, 2, 3, 4, 5} };
+                        {1, 2, 3, 2, 1},
+                        {1, 2, 3, 2, 1},
+                        {1, 2, 3, 2, 1} };
 
-        int[][] b = {   {3, 2},
-                        {2, 3},
+        int[][] b = {   {1, 2},
+                        {2, 1},
                         {1, 2},
                         {2, 1},
-                        {4, 5}  };
+                        {1, 2}  };
 
         printMatrix(b);
 
         System.out.println("--------------");
         int[][] c = rotateMatrix(b);
-        printMatrix(c);
 
-        int [][] res = matrixMultiplication(a,b);
+        System.out.println("--------------");
+
+        System.out.println();
+        int[][] res = matrixMultiplication(a, b);
         printMatrix(res);
 
     }
@@ -48,14 +50,15 @@ public class Square_Matrix_Multiplication {
         int[][] temp = new int[c[0].length][c.length];
         for (int i = 0; i < c.length; i++) {
             int k = 0;
-            for (int j = c[0].length-1; j >= 0; j--) {
+            for (int j = c[0].length - 1; j >= 0; j--) {
                 temp[k][i] = c[i][j];
                 k++;
             }
         }
         return temp;
     }
-    public static void printMatrix(int [][] m) {
+
+    public static void printMatrix(int[][] m) {
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
                 System.out.print(m[i][j] + " ");
@@ -65,18 +68,25 @@ public class Square_Matrix_Multiplication {
     }
 
 
-    public static int[][] matrixMultiplication(int[][] a, int[][] b) {
-        int[][] c = rotateMatrix(b);
-
+    public static int[][] matrixMultiplication(int[][] a, int[][] c) {
+        int[][] b = rotateMatrix(c);
 
         int[][] d = new int[a[0].length][b.length];
 
+        int k = 0;
         for (int i = 0; i < a[0].length; i++) {
-            for (int j = 0; j < b.length; j++) {
-                int sum = a[i][j] * b[j][i];
+            int n = 0;
+            int sum = 0;
+            for (int j = b.length - 1; j > 0; j--) {
+                sum += a[i][n] * b[j][n];
+                n++;
+            }
+            d[i][k] = sum;
+            k++;
+            if (k >= b.length) {
+                k = 0;
             }
         }
-
-        return null;
+        return d;
     }
 }
