@@ -22,16 +22,13 @@ package kata_s;
 public class Square_Matrix_Multiplication {
     public static void main(String[] args) {
         //int[][] a = {{1,2},{3,2}};
-        int[][] a = {   {1, 2, 3, 2, 1},
-                        {1, 2, 3, 2, 1},
-                        {1, 2, 3, 2, 1},
-                        {1, 2, 3, 2, 1} };
+        int[][] a = {   {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9} };
 
-        int[][] b = {   {1, 2},
-                        {2, 1},
-                        {1, 2},
-                        {2, 1},
-                        {1, 2}  };
+        int[][] b = {   {10, 13},
+                        {11, 14},
+                        {12, 15}  };
 
         printMatrix(b);
 
@@ -74,19 +71,39 @@ public class Square_Matrix_Multiplication {
         int[][] d = new int[a[0].length][b.length];
 
         int k = 0;
+        int sum = 0;
+        int n = 0;
         for (int i = 0; i < a[0].length; i++) {
-            int n = 0;
-            int sum = 0;
-            for (int j = b.length - 1; j > 0; j--) {
-                sum += a[i][n] * b[j][n];
-                n++;
-            }
-            d[i][k] = sum;
-            k++;
-            if (k >= b.length) {
-                k = 0;
+            for (int j = b.length-1; j >= 0; j--) {
+                for (int l=0; l < a.length; l++){
+                    sum += (a[i][n] * b[j][n]);
+                    System.out.println(a[i][n] + "   " + b[j][n]+ "   " + sum);
+                    n++;
+                }
+                d[i][k] = sum;
+                sum = 0;
+                n = 0;
+                k++;
+                if (k >= b.length) {
+                    k = 0;
+                }
             }
         }
         return d;
+    }
+
+
+    //------- someones solution
+    public static int[][] matrixMultiplication2(int[][] a, int[][] b) {
+        int n = a.length;
+        int[][] res = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < n; k++) {
+                    res[i][j] += a[i][k] * b[k][j];
+                }
+            }
+        }
+        return res;
     }
 }
