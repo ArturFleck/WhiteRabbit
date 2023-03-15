@@ -7,25 +7,58 @@ import java.util.List;
 public class StripComments {
     public static void main(String[] args) {
 
-        StripComments.stripComments( "apples, pears # and bananas\ngrapes\nbananas !apples", new String[] { "#", "!" } );
+        StripComments.stripComments("\na\n b\nc\na", new String[]{",", "^", "-", "'", "=", "!", "?"});
     }
+
     public static String stripComments(String text, String[] commentSymbols) {
         List<String> str = new ArrayList<>();
         StringBuilder newText = new StringBuilder();
-        for (int i = 0; i<text.length(); i++){
-            if (text.charAt(i)=='\n'){
+        boolean truth = false;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '\n') {
+                truth = false;
+
+                if (newText.length() > 0) {
+                    while (newText.charAt(newText.length() - 1) == ' ') {
+                        newText.deleteCharAt(newText.length() - 1);
+                    }
+                }
                 str.add(String.valueOf(newText));
+
                 newText = new StringBuilder();
                 i++;
+            }
+
+            for (int j = 0; j < commentSymbols.length; j++) {
+                if (text.charAt(i) == commentSymbols[j].charAt(0)) {
+                    truth = true;
                 }
-            newText.append(text.charAt(i));
-            if(i == (text.length()-1)){
-                str.add(String.valueOf(newText));
+            }
+
+            if (!truth) {
+                newText.append(text.charAt(i));
+            }
+
+            if (i == (text.length() - 1)) {
+                if (newText.length() > 0) {
+                    while (newText.charAt(newText.length() - 1) == ' ') {
+                        newText.deleteCharAt(newText.length() - 1);
+                    }
+                    str.add(String.valueOf(newText));
+                }
             }
         }
 
-        System.out.println(str);
+        //System.out.println(str);
+        String newString = "";
+        for (int i = 0; i < str.size(); i++) {
+            newString += str.get(i);
+            if (i < str.size() - 1) {
+                newString += "\n";
+            }
+        }
+        System.out.println(newString);
 
-        return "";
+        return newString;
     }
 }
