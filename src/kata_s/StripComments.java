@@ -7,7 +7,7 @@ import java.util.List;
 public class StripComments {
     public static void main(String[] args) {
 
-        StripComments.stripComments("\na\n b\nc\na", new String[]{",", "^", "-", "'", "=", "!", "?"});
+        StripComments.stripComments("\na\n  b\nc\na", new String[]{",", "^", "-", "'", "=", "!", "?"});
     }
 
     public static String stripComments(String text, String[] commentSymbols) {
@@ -22,6 +22,8 @@ public class StripComments {
                     while (newText.charAt(newText.length() - 1) == ' ') {
                         newText.deleteCharAt(newText.length() - 1);
                     }
+                    while (newText.charAt(0) == ' ')
+                        newText.deleteCharAt(0);
                 }
                 str.add(String.valueOf(newText));
 
@@ -44,6 +46,10 @@ public class StripComments {
                     while (newText.charAt(newText.length() - 1) == ' ') {
                         newText.deleteCharAt(newText.length() - 1);
                     }
+
+                    while (newText.charAt(0) == ' ')
+                        newText.deleteCharAt(0);
+
                     str.add(String.valueOf(newText));
                 }
             }
@@ -52,9 +58,11 @@ public class StripComments {
         //System.out.println(str);
         String newString = "";
         for (int i = 0; i < str.size(); i++) {
-            newString += str.get(i);
-            if (i < str.size() - 1) {
-                newString += "\n";
+            if (str.get(i) != "\n") {
+                newString += str.get(i);
+                if (i < str.size() - 1) {
+                    newString += "\n";
+                }
             }
         }
         System.out.println(newString);
